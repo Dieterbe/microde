@@ -1,0 +1,34 @@
+microDE is a micro desktop environment.
+
+The main idea is that you can use shellscripts to set up your environment
+how you want it, by starting certain applications with certain options based
+on the hostname of the system or other factors (such as realtime kernel or not)
+And also freedom to pick the WM you want and such.  and all that with
+minimal configuration overhead. (xdg autostart desktop files for example are
+bloated and not nearly as flexible) [background: have 1 vcs repository for
+your $HOME, but yet, allow for very different workspaces. so you can use the
+same $HOME on very different systems]
+
+Much of the stuff is also related to launching an ssh-agent, loading your
+ssh keys and setting up tunnels and proxies to trusted hosts.
+either from a tty or inside X
+
+
+Some things which are not configurable, are to be seen as "the way to go".
+Such as the usage of xscreensaver, xmodmap and xbindkeys.
+If there are profound reasons to disagree, these things will be made
+configurable or replaced by better alternatives
+
+
+== settings ==
+set $WM to your window manager(s) that you want.
+$WM will be executed directly
+
+the code and examples = the documentation
+
+
+== dependencies ==
+
+xscreensaver
+xmodmap
+xbindkeys

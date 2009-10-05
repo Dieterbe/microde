@@ -1,0 +1,1 @@
+source $XDG_CONFIG_HOME/mde/main 2>/dev/null

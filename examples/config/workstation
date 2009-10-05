@@ -1,0 +1,5 @@
+export LOAD_SSH_KEYS='id_rsa_personal'
+post_ssh_keys () {
+	# TODO good check if this is already running or not
+	running xinit && ( running urxvtc || urxvtc -title irc -e ssh server & )
+}

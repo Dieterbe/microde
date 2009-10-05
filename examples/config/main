@@ -1,0 +1,49 @@
+# hosts to which you like to open ssh tunnels to. you can use these tunnels to portmap or use socks to route insecure traffic over it.
+# make sure they are listed in your known hosts file
+# they will be tried in order to setup tunnels with, if all fail you'll have no tunnels
+TRUSTED_ENDPOINTS=(192.168.1.2 dieter.servebeer.com build.archlinux.org)
+
+# list of ssh arguments you want to execute which will setup your portmaps and socks proxies.
+# you don't need to specify the ssh command itself, nor the target host.
+SSH_TUNNELS=('-fND localhost:21222' '-fN -L 1143:mail.priorweb.be:143' '-fN -L 1025:smtp.priorweb.be:25' '-fN -L 4443:localhost:443')
+# http, mail, mail, svn #TODO this is not correct: for things that point to localhost, eg 4443:localhost:443, only that specific trusted host hosts the svn repo we want/need
+
+GTD_INBOX=$HOME/.txtdata/inbox
+WM=wmii
+
+if [[ `uname -r` =~ rt ]]
+then
+	MODE=AUDIO
+else
+	MODE=WS
+fi
+
+source $XDG_CONFIG_HOME/mde/ddm-settings
+
+function pre_wm () {
+	autocutsel -selection PRIMARY &
+	$XDG_DATA_HOME/uzbl/scripts/cookie_daemon.py
+	urxvtd -f -o
+
+	if [ "$MODE" == AUDIO ]
+	then
+		running qjackctl || qjackctl --start &> /dev/null &
+		sleep 1
+		running fluidsynth || fluidsynth -r 48000 -i -s -a jack /usr/share/soundfonts/fluidr3/FluidR3GM.SF2 &> /dev/null &
+		running rosegarden || rosegarden &> /dev/null &
+		running ardour2-8 || ardour2 &> /dev/null &
+	else
+		# can be useful if you need to play a midifile. this is somewhat like timidity -iAD but timidity segfaults sometimes with jack
+		running fluidsynth || fluidsynth -i -s -a alsa /usr/share/soundfonts/fluidr3/FluidR3GM.SF2 &> /dev/null &
+	fi
+	#mocp &
+}
+
+post_ssh_tunnels () {
+	running xinit && ( running claws-mail || claws-mail & )
+}
+
+[ -f ~/.config/mde/$HOSTNAME ] && source ~/.config/mde/$HOSTNAME
+
+export -f post_ssh_keys
+export -f post_ssh_tunnels

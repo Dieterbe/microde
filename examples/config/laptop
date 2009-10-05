@@ -1,0 +1,10 @@
+#urxvtc -title work FIXME only do this once
+
+export LOAD_SSH_KEYS='id_rsa_personal id_rsa_kangaroot'
+
+post_ssh_keys () {
+	if [[ $(tty) =~ /dev/pts/* ]]
+	then
+		urxvtc -title irc -e ssh dieter.servebeer.com &
+	fi
+}
