@@ -1,9 +1,9 @@
 all: install
 
 install:
-	install -d $(DESTDIR)/bin
+	install -d $(DESTDIR)/usr/bin
 	install -d $(DESTDIR)/usr/lib/microde
-	install -D -m755 src/microde.sh $(DESTDIR)/bin/microde
+	install -D -m755 src/microde.sh $(DESTDIR)/usr/bin/microde
 	cp -ax src/lib/*                $(DESTDIR)/usr/lib/microde/
 	install -D -m644 README $(DESTDIR)/usr/share/microde/docs
 
