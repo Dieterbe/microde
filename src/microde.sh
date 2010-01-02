@@ -29,8 +29,8 @@ else
 	cfg=$HOME/.config/mde/main
 fi
 source $cfg || echo "could not source config" >&2
-source /usr/lib/microde/ssh-keys.sh
-/usr/lib/microde/ssh-tunnels.sh >/dev/null &
+microde-ssh-keys.sh
+microde-ssh-tunnels.sh >/dev/null &
 echo 'xecuting pre_wm'
 pre_wm
 echo "executing wm $WM"

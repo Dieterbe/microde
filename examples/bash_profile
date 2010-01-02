@@ -1,8 +1,8 @@
 source ~/.config/mde/main 2>/dev/null
 #ps aux | grep -v grep | grep -q ssh-agent || eval $(ssh-agent -s)
 eval $(ssh-agent -s) # how to reuse already running agent?
-/usr/lib/microde/ssh-keys.sh
-/usr/lib/microde/ssh-tunnels.sh &
+microde-ssh-keys.sh
+microde-ssh-tunnels.sh &
 
 if [[ $(tty) == /dev/tty1 ]]
 then
