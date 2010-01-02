@@ -1,24 +1,28 @@
 microDE is a micro desktop environment.
 
-The main idea is that you can use shellscripts to set up your environment
-how you want it, by starting certain applications with certain options based
-on the hostname of the system or other factors (such as realtime kernel or not)
-And also freedom to pick the WM you want and such.  and all that with
-minimal configuration overhead. (xdg autostart desktop files for example are
-bloated and not nearly as flexible) [background: have 1 vcs repository for
-your $HOME, but yet, allow for very different workspaces. so you can use the
-same $HOME on very different systems]
+## Goals
+* adherence to the kiss principle, unix philosophy and xdg basedir spec (simple code, very flexible, simple txt configs
+ - actually shell scripts that get sourced -, integration with other tools, choose your own WM/shell, etc)
+* compatibility with multi-user scenarios in a secure way
+* setup without root access (best practice for this? how to handle login?) (it shouldn't be a global configuration affecting all users)
+* support console/shell and Xorg sessions equally.
+* start ssh-agent and other programs (daemons, [non-]graphical tools, ..) at the
+  appropriate time for maximum availability.
+* have callback hooks to for example load ssh keys when the agent is started, start ssh tunnels/proxies, load apps when X is up, etc.
+  This should work independently of the type of session (X vs shell).
+* scriptability so you can do different things based on hostname, type of kernel being loaded, and so on.
 
-Much of the stuff is also related to launching an ssh-agent, loading your
-ssh keys and setting up tunnels and proxies to trusted hosts.
-either from a tty or inside X
-
-
-Some things which are not configurable, are to be seen as "the way to go".
-Such as the usage of xscreensaver, xmodmap and xbindkeys.
-If there are profound reasons to disagree, these things will be made
-configurable or replaced by better alternatives
-
+## Potential pitfalls/design notes
+* when doing startx from console, and lock screen in X -> ctl-alt-F1 -> ctrl-c gives you shell for that user
+* when logging in to the system you need to be able to pick your session (X,
+  shell, ..), autostarting apps etc as appropriate. but you should be able
+  to switch from shell to X or vice versa without needing to re-login or
+  restart non-graphical apps. and honoring the above problem (not just
+  'startx' on console)
+* xdg autostart desktop files for example are bloated and very inflexible
+* the initial need for this arose when i started keeping my $HOME in VCS, and wanted to
+  use the same home on many different systems, hence the scripts that setup
+  a different environment based on hostname and such.
 
 == settings ==
 set $WM to your window manager(s) that you want.
@@ -26,9 +30,13 @@ $WM will be executed directly
 
 the code and examples = the documentation
 
-
 == dependencies ==
+TODO make all of them optional.
+they were seen as "should be the best for everyone" and hence mandatory but this is:
+1) not compatible with shell sessions
+2) overkill
 
 xscreensaver
 xmodmap
 xbindkeys
+
