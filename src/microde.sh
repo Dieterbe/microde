@@ -16,11 +16,6 @@ pre_wm () {
 # library
 source /usr/lib/microde/functions.sh
 
-# stuff everybody wants/needs
-xscreensaver -no-splash >/dev/null &
-[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
-xbindkeys
-
 # load config & launch things the user configured
 if [ -n "$XDG_CONFIG_HOME" ]
 then

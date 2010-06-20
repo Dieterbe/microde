@@ -21,6 +21,9 @@ fi
 source $XDG_CONFIG_HOME/mde/ddm-settings
 
 function pre_wm () {
+	xscreensaver -no-splash >/dev/null &
+	[ -f ~/.Xmodmap ] && xmodmap ~/.Xmodmap
+	xbindkeys 2>/dev/null # run if installed, otherwise i have configured bindings in my WM
 	autocutsel -selection PRIMARY &
 	$XDG_DATA_HOME/uzbl/scripts/cookie_daemon.py
 	urxvtd -f -o

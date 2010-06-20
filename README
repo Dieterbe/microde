@@ -30,17 +30,6 @@ $WM will be executed directly
 
 the code and examples = the documentation
 
-== dependencies ==
-TODO make all of them optional.
-they were seen as "should be the best for everyone" and hence mandatory but this is:
-1) not compatible with shell sessions
-2) overkill
-
-xscreensaver
-xmodmap
-xbindkeys
-
-
 TODO's:
 - make it "ssesion manager" as well, but:
 - no root required to use/install (i.e. each user who wants it, can do it)
