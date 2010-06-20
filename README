@@ -50,3 +50,5 @@ TODO's:
 - default/sample config), but keep process running in terminal. even after
 - spawning X or a terminal in separate process, you can still change your
 - environment by writing to a fifo.
+- no ssh-add for those keys that are being forwarded already over ssh
+- integration with autossh or similar tool. (but autossh does not support fallback to other hosts) 
